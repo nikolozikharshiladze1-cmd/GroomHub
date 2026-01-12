@@ -3,9 +3,6 @@ let cart = [];
 let products = [];
 let currentFilter = 'all';
 
-// ======================================
-// PRODUCTS DATA (თქვენ ჩაამატეთ ფოტოების URL-ები)
-// ======================================
 const productsData = [
     // წვერის მოვლა (8 პროდუქტი)
     {
@@ -230,9 +227,7 @@ const productsData = [
     }
 ];
 
-// ======================================
-// DOM ELEMENTS
-// ======================================
+
 const burgerBtn = document.getElementById('burgerBtn');
 const navMenu = document.getElementById('navMenu');
 const cartBtn = document.getElementById('cartBtn');
@@ -251,9 +246,7 @@ const acceptCookies = document.getElementById('acceptCookies');
 const productsGrid = document.getElementById('productsGrid');
 const filterBtns = document.querySelectorAll('.filter-btn');
 
-// ======================================
-// COOKIES HANDLING
-// ======================================
+
 function checkCookies() {
     const cookiesAccepted = localStorage.getItem('cookiesAccepted');
     if (!cookiesAccepted) {
@@ -268,9 +261,8 @@ acceptCookies.addEventListener('click', () => {
     cookiesNotification.classList.remove('show');
 });
 
-// ======================================
-// BURGER MENU
-// ======================================
+
+
 burgerBtn.addEventListener('click', () => {
     burgerBtn.classList.toggle('active');
     navMenu.classList.toggle('active');
@@ -278,7 +270,7 @@ burgerBtn.addEventListener('click', () => {
     document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
 });
 
-// Close menu when clicking on nav links
+
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
         burgerBtn.classList.remove('active');
@@ -288,9 +280,7 @@ document.querySelectorAll('.nav-link').forEach(link => {
     });
 });
 
-// ======================================
-// CART FUNCTIONALITY
-// ======================================
+
 function openCart() {
     cartSidebar.classList.add('active');
     overlay.classList.add('active');
@@ -312,7 +302,7 @@ overlay.addEventListener('click', () => {
     document.body.style.overflow = '';
 });
 
-// Load cart from localStorage
+
 function loadCart() {
     const savedCart = localStorage.getItem('cart');
     if (savedCart) {
@@ -321,12 +311,12 @@ function loadCart() {
     }
 }
 
-// Save cart to localStorage
+
 function saveCart() {
     localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-// Add to cart
+
 function addToCart(product) {
     const existingItem = cart.find(item => item.id === product.id);
     
@@ -345,18 +335,18 @@ function addToCart(product) {
     saveCart();
     updateCart();
     
-    // Show notification
+    
     showNotification('პროდუქტი დაემატა კალათაში!');
 }
 
-// Remove from cart
+
 function removeFromCart(productId) {
     cart = cart.filter(item => item.id !== productId);
     saveCart();
     updateCart();
 }
 
-// Update quantity
+
 function updateQuantity(productId, change) {
     const item = cart.find(item => item.id === productId);
     if (item) {
@@ -370,13 +360,13 @@ function updateQuantity(productId, change) {
     }
 }
 
-// Update cart UI
+
 function updateCart() {
-    // Update cart count
+    
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
     cartCount.textContent = totalItems;
     
-    // Update cart items
+    
     if (cart.length === 0) {
         cartItems.innerHTML = `
             <div class="empty-cart">
@@ -407,14 +397,14 @@ function updateCart() {
                 </div>
             </div>
         `).join('');
+    
         
-        // Calculate total
         const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         cartTotal.textContent = `₾${total.toFixed(2)}`;
     }
 }
 
-// Notification
+
 function showNotification(message) {
     const notification = document.createElement('div');
     notification.style.cssText = `
@@ -438,7 +428,7 @@ function showNotification(message) {
     }, 2000);
 }
 
-// Image fallback handler
+
 function handleImageError(img, productName) {
     if (!img.hasAttribute('data-fallback-used')) {
         img.setAttribute('data-fallback-used', 'true');
@@ -446,15 +436,13 @@ function handleImageError(img, productName) {
     }
 }
 
-// ======================================
-// LOAD AND DISPLAY PRODUCTS
-// ======================================
+
 function loadProducts() {
     products = productsData;
     displayProducts(products);
 }
 
-// Display products
+
 function displayProducts(productsToShow) {
     if (productsToShow.length === 0) {
         productsGrid.innerHTML = `
@@ -484,7 +472,7 @@ function displayProducts(productsToShow) {
     `).join('');
 }
 
-// Filter products
+
 filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         filterBtns.forEach(b => b.classList.remove('active'));
@@ -500,35 +488,33 @@ filterBtns.forEach(btn => {
             displayProducts(filtered);
         }
         
-        // Smooth scroll to products
+     
         document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
     });
 });
 
-// Category card filters
+
 document.querySelectorAll('.btn-category').forEach(btn => {
     btn.addEventListener('click', () => {
         const filter = btn.dataset.filter;
         
-        // Update filter buttons
+        
         filterBtns.forEach(b => b.classList.remove('active'));
         const matchingBtn = Array.from(filterBtns).find(b => b.dataset.filter === filter);
         if (matchingBtn) {
             matchingBtn.classList.add('active');
         }
         
-        // Filter and display
+        
         const filtered = products.filter(p => p.category === filter);
         displayProducts(filtered);
         
-        // Scroll to products
+        
         document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
     });
 });
 
-// ======================================
-// FORM VALIDATION
-// ======================================
+
 const formInputs = {
     name: {
         pattern: /^[ა-ჰa-zA-Z\s]{2,50}$/,
@@ -575,7 +561,7 @@ function validateField(input) {
     return true;
 }
 
-// Real-time validation
+
 contactForm.querySelectorAll('input, textarea').forEach(input => {
     input.addEventListener('blur', () => validateField(input));
     input.addEventListener('input', () => {
@@ -585,7 +571,7 @@ contactForm.querySelectorAll('input, textarea').forEach(input => {
     });
 });
 
-// Form submission
+
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
     
@@ -600,14 +586,14 @@ contactForm.addEventListener('submit', (e) => {
         showNotification('შეტყობინება წარმატებით გაიგზავნა!');
         contactForm.reset();
         
-        // Remove error classes
+        
         contactForm.querySelectorAll('.form-group').forEach(group => {
             group.classList.remove('error');
         });
     }
 });
 
-// Toggle password visibility
+
 togglePassword.addEventListener('click', () => {
     const passwordInput = document.getElementById('password');
     const icon = togglePassword.querySelector('i');
@@ -623,9 +609,7 @@ togglePassword.addEventListener('click', () => {
     }
 });
 
-// ======================================
-// HEADER SCROLL EFFECT
-// ======================================
+
 window.addEventListener('scroll', () => {
     if (window.scrollY > 100) {
         header.classList.add('scrolled');
@@ -636,9 +620,7 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// ======================================
-// SCROLL TO TOP
-// ======================================
+
 scrollTopBtn.addEventListener('click', () => {
     window.scrollTo({
         top: 0,
@@ -646,9 +628,7 @@ scrollTopBtn.addEventListener('click', () => {
     });
 });
 
-// ======================================
-// SMOOTH SCROLL FOR NAV LINKS
-// ======================================
+
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -665,9 +645,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// ======================================
-// ACTIVE NAV LINK ON SCROLL
-// ======================================
+
 const sections = document.querySelectorAll('section[id]');
 
 window.addEventListener('scroll', () => {
@@ -690,9 +668,7 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// ======================================
-// ANIMATION ON SCROLL
-// ======================================
+
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -100px 0px'
@@ -706,21 +682,19 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe elements
+
 document.querySelectorAll('.category-card, .benefit-card').forEach(el => {
     observer.observe(el);
 });
 
-// ======================================
-// INITIALIZE
-// ======================================
+
 document.addEventListener('DOMContentLoaded', () => {
     checkCookies();
     loadCart();
     loadProducts();
 });
 
-// Add CSS animations
+
 const style = document.createElement('style');
 style.textContent = `
     @keyframes slideIn {
