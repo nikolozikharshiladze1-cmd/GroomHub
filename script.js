@@ -4,7 +4,7 @@ let products = [];
 let currentFilter = 'all';
 
 const productsData = [
-    // წვერის მოვლა (8 პროდუქტი)
+   
     {
         id: 1,
         name: 'წვერის ზეთი Premium',
@@ -78,7 +78,7 @@ const productsData = [
         categoryName: 'წვერის მოვლა'
     },
     
-    // თმის მოვლა (8 პროდუქტი)
+   
     {
         id: 9,
         name: 'თმის ბალზამი',
@@ -152,7 +152,7 @@ const productsData = [
         categoryName: 'თმის მოვლა'
     },
     
-    // კანის მოვლა (8 პროდუქტი)
+    
     {
         id: 17,
         name: 'სახის დამატენიანებელი',
