@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GroomHub - თავის მოვლის საშუალებები მამაკაცებისა და ქალებისთვის">
+    <title>GroomHub - თავის მოვლის პროდუქტები</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Cookies Notification -->
+    <div class="cookies-notification" id="cookiesNotification">
+        <div class="cookies-content">
+            <button class="btn-accept" id="acceptCookies">მიღება</button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <a href="#home" class="logo">
+                        <i class="fas fa-cut"></i>
+                        <span>GroomHub</span>
+                    </a>
+                    
+                    <ul class="nav-menu" id="navMenu">
+                        <li><a href="#home" class="nav-link">მთავარი</a></li>
+                        <li><a href="#categories" class="nav-link">კატეგორიები</a></li>
+                        <li><a href="#products" class="nav-link">პროდუქტები</a></li>
+                        <li><a href="#about" class="nav-link">ჩვენს შესახებ</a></li>
+                        <li><a href="#contact" class="nav-link">კონტაქტი</a></li>
+                    </ul>
+
+                    <div class="nav-actions">
+                        <button class="cart-btn" id="cartBtn">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count" id="cartCount">0</span>
+                        </button>
+                        <button class="burger-btn" id="burgerBtn">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>კალათა</h3>
+            <button class="close-cart" id="closeCart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be added here dynamically -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>სულ:</span>
+                <span id="cartTotal">₾0.00</span>
+            </div>
+            <button class="btn-checkout">შეკვეთა</button>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">თქვენი სილამაზის პარტნიორი</h1>
+                <p class="hero-subtitle">პრემიუმ ხარისხის თავის მოვლის პროდუქტები მამაკაცებისა და ქალებისთვის</p>
+                <div class="hero-buttons">
+                    <a href="#products" class="btn btn-primary">პროდუქტები</a>
+                    <a href="#about" class="btn btn-secondary">მეტის ნახვა</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <h2 class="section-title">კატეგორიები</h2>
+            <div class="categories-grid">
+                <div class="category-card" data-category="beard">
+                    <div class="category-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>წვერის მოვლა</h3>
+                    <p>პროფესიონალური საშუალებები წვერის მოვლისთვის</p>
+                    <button class="btn-category" data-filter="beard">ნახვა</button>
+                </div>
+
+                <div class="category-card" data-category="hair">
+                    <div class="category-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3>თმის მოვლა</h3>
+                    <p>ბალზამები და შამპუნები ჯანსაღი თმისთვის</p>
+                    <button class="btn-category" data-filter="hair">ნახვა</button>
+                </div>
+
+                <div class="category-card" data-category="skin">
+                    <div class="category-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>კანის მოვლა</h3>
+                    <p>დამატენიანებლები და აკნეს საწინააღმდეგო პროდუქტები</p>
+                    <button class="btn-category" data-filter="skin">ნახვა</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <h2 class="section-title">ჩვენი პროდუქტები</h2>
+            
+            <div class="products-filter">
+                <button class="filter-btn active" data-filter="all">ყველა</button>
+                <button class="filter-btn" data-filter="beard">წვერის მოვლა</button>
+                <button class="filter-btn" data-filter="hair">თმის მოვლა</button>
+                <button class="filter-btn" data-filter="skin">კანის მოვლა</button>
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be loaded here from API -->
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>იტვირთება...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About/Benefits Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">რატომ ჩვენ?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>ხარისხის გარანტია</h3>
+                    <p>მხოლოდ სერტიფიცირებული და შემოწმებული პროდუქტები</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>სწრაფი მიწოდება</h3>
+                    <p>უფასო მიწოდება 100₾-ზე მეტი შეკვეთისას</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>24/7 მხარდაჭერა</h3>
+                    <p>ჩვენი გუნდი ყოველთვის მზად არის დაგეხმაროთ</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>ბუნებრივი</h3>
+                    <p>პროდუქტები შექმნილია ბუნებრივი ინგრედიენტებით</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">დაგვიკავშირდით</h2>
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h3>საკონტაქტო ინფორმაცია</h3>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>თბილისი, საქართველო</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+995 555 123 456</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@groomhub.ge</span>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">სახელი *</label>
+                        <input type="text" id="name" name="name" required>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">ელ-ფოსტა *</label>
+                        <input type="email" id="email" name="email" required>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">ტელეფონი *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="form-group password-group">
+                        <label for="password">პაროლი *</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="password" name="password" required>
+                            <button type="button" class="toggle-password" id="togglePassword">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">შეტყობინება *</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">გაგზავნა</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>GroomHub</h4>
+                    <p>თქვენი სილამაზის და თავის მოვლის საიმედო პარტნიორი</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>სწრაფი ლინკები</h4>
+                    <ul>
+                        <li><a href="#home">მთავარი</a></li>
+                        <li><a href="#products">პროდუქტები</a></li>
+                        <li><a href="#about">ჩვენს შესახებ</a></li>
+                        <li><a href="#contact">კონტაქტი</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>კატეგორიები</h4>
+                    <ul>
+                        <li><a href="#products">წვერის მოვლა</a></li>
+                        <li><a href="#products">თმის მოვლა</a></li>
+                        <li><a href="#products">კანის მოვლა</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>მიჰყევით ჩვენ</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 GroomHub. ყველა უფლება დაცულია.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
